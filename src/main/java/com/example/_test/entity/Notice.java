@@ -3,15 +3,16 @@ package com.example._test.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "notices")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +23,7 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne
-    private User authorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id")
+    private User admin;
 }
