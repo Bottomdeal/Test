@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseDto<GetUserResponseDto> getUserInfo(String username) {
 
-        User user = (User) userRepository.findByUserName(username).orElse(null);
+        User user = (User) userRepository.findByUsername(username).orElse(null);
 
         if (user == null) {
             return ResponseDto.setFailed(ResponseMessage.NOT_EXISTS_USER);

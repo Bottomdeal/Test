@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 중복되는 유저 네임 검증
-        if (userRepository.existsByUserName(username)) {
+        if (userRepository.existsByUsername(username)) {
             // 중복 되는 경우 (사용할 수 X)
             return ResponseDto.setFailed(ResponseMessage.EXIST_DATA);
         }
@@ -83,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
 
         int exprTime = jwtProvider.getExpiration();
 
-        user = (User) userRepository.findByUserName(username)
+        user = (User) userRepository.findByUsername(username)
                 .orElse(null);
 
         if (user == null) {

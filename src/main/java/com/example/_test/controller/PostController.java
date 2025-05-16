@@ -30,7 +30,8 @@ public class PostController {
     // : DTO 객체에 대한 검증을 수행하는 애너테이션
     // : 사용자가 클라이언트로부터 전달한 데이터가 미리 정의된 규칙에 맞는지 확인
     // - DTO 내에서 정의된 규칙에 맞지 않으면 에러 발생
-    public ResponseEntity<ResponseDto<PostListResponseDto>> createPost(@Valid @RequestBody PostCreateRequestDto dto) {
+    public ResponseEntity<ResponseDto<PostListResponseDto>> createPost(
+            @Valid @RequestBody PostCreateRequestDto dto) {
         ResponseDto<PostListResponseDto> post = postService.createPost(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
     }

@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PostCreateRequestDto {
+    private Long id;
+
     @NotBlank(message = "제목은 필수 입력 값입니다.")
     private String title;
 

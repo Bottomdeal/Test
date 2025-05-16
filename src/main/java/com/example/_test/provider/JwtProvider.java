@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Component // 스프링 컨테이너에서 해당 클래스를 빈으로 관리하기 위해 사용
 /*
  * @Bean VS @Component

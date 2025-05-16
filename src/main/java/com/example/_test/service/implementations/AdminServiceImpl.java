@@ -11,8 +11,6 @@ import com.example._test.repository.RoleRepository;
 import com.example._test.repository.UserRepository;
 import com.example._test.service.AdminService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
         PromoteToAdminResponseDto data = null;
 
         // 1. 사용자 조회
-        User user = (User) userRepository.findByUserName(dto.getUsername())
+        User user = (User) userRepository.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException(ResponseMessage.NOT_EXISTS_USER));
 
         // 2. 권한 생성 또는 조회
@@ -69,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
         DemoteFromAdminResponseDto data = null;
 
         // 1. 사용자 조회
-        User user = (User) userRepository.findByUserName(dto.getUsername())
+        User user = (User) userRepository.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException(ResponseMessage.NOT_EXISTS_USER));
 
         // 2. 현재 권한 목록에서 ADMIN 제거 후 updatedRoles에 담기

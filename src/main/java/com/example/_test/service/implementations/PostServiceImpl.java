@@ -1,12 +1,15 @@
 package com.example._test.service.implementations;
 
 import com.example._test.common.ResponseMessage;
+import com.example._test.dto.admin.request.PutAuthorityRequestDto;
 import com.example._test.dto.request.PostCreateRequestDto;
 import com.example._test.dto.request.PostUpdateRequestDto;
 import com.example._test.dto.response.PostListResponseDto;
 import com.example._test.dto.response.ResponseDto;
 import com.example._test.entity.Post;
+import com.example._test.entity.User;
 import com.example._test.repository.PostRepository;
+import com.example._test.repository.UserRepository;
 import com.example._test.service.PostService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +24,15 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     @Override
     public ResponseDto<PostListResponseDto> createPost(PostCreateRequestDto dto) {
         PostListResponseDto responseDto = null;
+
+        User user = (User) userRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException(ResponseMessage.NOT_EXISTS_USER));
 
         Post newPost = Post.builder()
                 .title(dto.getTitle())
